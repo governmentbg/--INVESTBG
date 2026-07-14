@@ -1,0 +1,45 @@
+# enables integrity checks on script files
+<ifModule mod_headers.c>
+    Header add Access-Control-Allow-Origin "*"
+</ifModule>
+
+# compress output
+<ifModule mod_deflate.c>
+    <filesMatch "\\.(js|css)$">
+        SetOutputFilter DEFLATE
+    </filesMatch>
+</ifModule>
+
+# add expires
+<ifModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+</ifModule>
+
+# no E-Tags
+FileETag None
+
+# cache optimizations
+<ifModule mod_headers.c>
+    Header unset Pragma
+    Header unset ETag
+    Header unset Last-Modified
+    # Header set Cache-Control "public, no-transform"
+    <filesMatch "\\.(js|css)$">
+        # Header set Cache-Control "max-age=30758400, public, no-transform"
+        Header set X-Content-Type-Options "nosniff"
+    </filesMatch>
+    <filesMatch "\\.(jpg|png|jpeg|gif)$">
+        # Header set Cache-Control "max-age=30758400, public, no-transform"
+    </filesMatch>
+</ifModule>
+
+# cache buster
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule (.*)\.([0-9]+)\.(js|jpg|png|jpeg|gif|css)$ $1.$3 [L]
+    <ifModule mod_headers.c>
+        Header set Cache-Control "immutable"
+    </ifModule>
+</IfModule>

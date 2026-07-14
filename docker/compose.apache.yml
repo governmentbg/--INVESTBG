@@ -1,0 +1,16 @@
+volumes:
+    shared:
+
+services:
+    web:
+        image: !reset null
+        build:
+            dockerfile: httpd.dockerfile
+        volumes:
+            - ./../:/var/www/html/webadmin/
+            - shared:/shared:ro
+        depends_on:
+            - app
+    app:
+        environment:
+            SENDFILE: "apache:/shared/sendfile"

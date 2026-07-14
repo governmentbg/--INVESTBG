@@ -1,0 +1,1 @@
+DROP TABLE translations_public CASCADE CONSTRAINTS;

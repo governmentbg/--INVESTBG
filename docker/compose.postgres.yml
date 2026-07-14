@@ -1,0 +1,18 @@
+services:
+    app:
+        environment:
+            DATABASE: "postgre://postgres:postgres@database/postgres?schema=public&persist=1"
+        depends_on:
+            - database
+    database:
+        image: postgres:16
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: postgres
+        volumes:
+            - ./postgres/bulgarian.affix:/usr/share/postgresql/16/tsearch_data/bulgarian.affix
+            - ./postgres/bulgarian.dict:/usr/share/postgresql/16/tsearch_data/bulgarian.dict
+            - ./postgres/bulgarian.stop:/usr/share/postgresql/16/tsearch_data/bulgarian.stop
+            - ./postgres/bulgarian.sql:/usr/share/postgresql/16/tsearch_data/bulgarian.sql
+            - ./../storage/database/postgre/:/dataset/
+            - ./postgres.sh:/docker-entrypoint-initdb.d/postgres.sh

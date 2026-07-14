@@ -1,0 +1,22 @@
+volumes:
+    minio:
+
+services:
+    app:
+        environment:
+            STORAGE_UPLOADS: "S3"
+            S3_URL: "http://storage:9000"
+            S3_ACCESS: "minioadmin"
+            S3_SECRET: "minioadmin"
+            S3_BUCKET: "testbucket"
+        depends_on:
+            - storage
+    storage:
+        image: minio/minio:latest
+        entrypoint: sh
+        volumes:
+            - minio:/data
+        environment:
+            MINIO_ADDRESS: ':9000'
+            MINIO_CONSOLE_ADDRESS: ':9001'
+        command: -c 'mkdir -p /data/testbucket && minio server /data'

@@ -1,0 +1,22 @@
+services:
+    app:
+        build:
+            dockerfile: php.minimal.dockerfile
+        ports:
+            - "8080:80"
+        environment:
+            DATABASE: "sqlite:///db.sqlite"
+            CACHE: "file"
+            STORAGE_SESSION: "/var/www/html/webadmin/storage/session"
+            STORAGE_UPLOADS: "/var/www/html/webadmin/storage/uploads"
+            STORAGE_MAIL: "FILE"
+            STORAGE_CACHE: "/var/www/html/webadmin/storage/cache"
+            SENDFILE: ""
+            LOG: "file"
+            STORAGE_LOG: "/var/www/html/webadmin/storage/log"
+            STORAGE_TMP: "/var/www/html/webadmin/storage/tmp"
+        volumes:
+            - ./../:/var/www/html/webadmin/:rw
+            - ./.env.php:/var/www/html/webadmin/.env.php
+            - ./.env:/var/www/html/webadmin/.env:ro
+        entrypoint: sh -c "cd /var/www/html/webadmin/ && php ./scripts/run.php permissions && php ./scripts/run.php migrations:up && php -S 0.0.0.0:80 -t ./public ./router.php"

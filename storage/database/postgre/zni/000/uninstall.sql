@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS nom_contract_types CASCADE;
+DROP TABLE IF EXISTS nom_company_types CASCADE;
+DROP TABLE IF EXISTS nom_certificate_types CASCADE;
+DROP TABLE IF EXISTS nom_reporting_periods CASCADE;
+DROP TABLE IF EXISTS nom_sectors CASCADE;
+DROP TABLE IF EXISTS nom_sector_activities CASCADE;
+DROP TABLE IF EXISTS nom_kid CASCADE;
+DROP TABLE IF EXISTS nom_nkpd CASCADE;
+DROP TABLE IF EXISTS nom_type_expense CASCADE;

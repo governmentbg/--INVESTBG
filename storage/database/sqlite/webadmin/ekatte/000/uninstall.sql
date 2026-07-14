@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS cities;
+DROP TABLE IF EXISTS municipalities;
+DROP TABLE IF EXISTS regions;

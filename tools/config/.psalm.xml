@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="2"
+    autoloader="../../vendor/autoload.php"
+    resolveFromConfigFile="true"
+    useDocblockTypes="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config"
+>
+    <projectFiles>
+        <directory name="../../app/classes" />
+        <directory name="../../public" />
+        <directory name="../../scripts" />
+        <ignoreFiles>
+            <directory name="../../vendor" />
+            <directory name="../../app/classes/base" />
+            <directory name="../../app/classes/webadmin/modules/*/*/views" />
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <RiskyTruthyFalsyComparison errorLevel="suppress" />
+        <PossiblyUndefinedArrayOffset errorLevel="suppress" />
+        <RedundantConditionGivenDocblockType errorLevel="suppress" />
+        <RedundantCastGivenDocblockType errorLevel="suppress" />
+        <RedundantCondition errorLevel="suppress" />
+        <RedundantCast errorLevel="suppress" />
+        <DocblockTypeContradiction errorLevel="suppress" />
+        <ReservedWord errorLevel="suppress" />
+        <NoValue errorLevel="suppress" />
+        <RiskyTruthyFalsyComparison errorLevel="suppress" />
+        <UndefinedMagicPropertyAssignment errorLevel="suppress" />
+        <UndefinedMagicPropertyFetch errorLevel="suppress" />
+        <UnnecessaryVarAnnotation errorLevel="suppress" />
+        <PossiblyUnusedMethod errorLevel="suppress" />
+        <PossiblyUnusedProperty errorLevel="suppress" />
+        <PossiblyUnusedReturnValue errorLevel="suppress" />
+        <PossiblyFalseOperand errorLevel="suppress" />
+        <PossiblyUnusedParam errorLevel="suppress" />
+        <UnusedVariable errorLevel="suppress" />
+        <UnusedFunctionCall errorLevel="suppress" />
+        <UnusedClass errorLevel="suppress" />
+        <PossiblyInvalidArgument>
+            <errorLevel type="suppress">
+                <referencedFunction name="vakata\collection\Collection::from" />
+            </errorLevel>
+        </PossiblyInvalidArgument>
+        <InvalidArgument>
+            <errorLevel type="suppress">
+                <referencedFunction name="vakata\collection\Collection::from" />
+            </errorLevel>
+        </InvalidArgument>
+        <ArgumentTypeCoercion>
+            <errorLevel type="suppress">
+                <file name="../../app/classes/webadmin/modules/common/crud/CRUDServiceVersionTrait.php" />
+            </errorLevel>
+        </ArgumentTypeCoercion>
+    </issueHandlers>
+    <universalObjectCrates>
+        <class name="vakata\user\User" />
+        <class name="vakata\phptree\Node" />
+        <class name="webadmin\components\html\TableRow" />
+    </universalObjectCrates>
+</psalm>

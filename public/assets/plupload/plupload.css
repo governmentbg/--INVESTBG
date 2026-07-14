@@ -1,0 +1,75 @@
+/* for bootstrap */
+.plupload-container { }
+.plupload-buttons { }
+.plupload-browse { }
+.plupload-list { }
+
+.plupload-container input,
+.plupload-container object { cursor:pointer; }
+
+.plupload-file { position:relative; /*background:white;*/ padding:0.5rem; }
+.plupload-file:after { display:none; content:""; position:absolute; background:transparent; width:100%; height:100%; top:0; left:0; z-index:5; }
+.plupload-dragging > .plupload-file:after { display:block; }
+
+.plupload-drag { position:absolute; text-align:center; left:0; top:2px; bottom:2px; width:3rem; border-right:1px dotted silver; cursor:move; }
+.plupload-drag > i { font-size:1rem; vertical-align:middle; margin-top:7px; }
+.plupload-remove, .plupload-settings, .plupload-edit, .plupload-tags { float:right; cursor:pointer; margin-left:1rem; }
+.plupload-details { float:right; color:silver; padding-right:1rem; }
+.plupload-title, .plupload-title:hover { color:#666; text-decoration:none; }
+.plupload-title > span { margin-left:0.5rem; }
+.plupload-title:hover { color:#000; }
+.plupload-progress { position:absolute; left:0; bottom:0; right:0; height:3px; overflow:hidden; font-size:1px; background:#ebebeb; }
+.plupload-progress-inner { position:absolute; height:100%; left:0; top:0; background:navy; display:block; width:0; }
+.plupload-complete .plupload-progress-inner { background:#64991e; width:100%; }
+
+.plupload-single { overflow:hidden; }
+.plupload-single .plupload-buttons { float:left; width:25%; text-align:left; }
+.plupload-single .plupload-list { margin-left:25%; }
+.plupload-disabled.plupload-single .plupload-list { margin-left:0; }
+
+.plupload-target { background:#FEFFBF; }
+.plupload-hover { background:#FEFF7F; }
+
+.plupload-image-container { text-align:center; }
+.plupload-image-container .plupload-buttons { float:none; width:auto; }
+.plupload-image-container .plupload-list { padding-bottom:0.5rem; margin-left:0; }
+.plupload-image { text-align:center; background-color:white; display:inline-block; height:148px; width:148px; margin:0.5rem 0.5rem 0 0.5rem; overflow:hidden; border-radius:0px; box-shadow:0 0 4px silver; background-position:center; background-repeat:no-repeat; background-size:128px 129px; }
+.plupload-image > .plupload-title { width:128px; height:20px; padding:0 10px; border-top:2px solid white; line-height:16px; background:rgba(255,255,255,0.7); overflow:hidden; position:absolute; bottom:9px; left:10px; text-overflow:ellipsis; white-space:nowrap; margin:0; }
+.plupload-image > .plupload-title > .icon { display:none; }
+.plupload-image > .plupload-progress { width:128px; bottom:8px; height:2px; left:10px; }
+.plupload-image.plupload-complete > .plupload-progress { display:none; }
+.plupload-image > .plupload-extra { display:none; }
+.plupload-image > .plupload-drag { display:none; }
+.plupload-image > .plupload-remove { margin-left:0; position:absolute; float:none; top:0; right:0; padding:0; width:28px; line-height:28px; height:28px; background:white; border-radius:4px; }
+.plupload-image > .plupload-settings { margin-left:0; position:absolute; float:none; top:0; left:0; padding:0; width:28px; line-height:28px; height:28px; background:white; border-radius:4px; }
+.plupload-image > .plupload-settings > i { margin-right:0; margin-left:0.25em; }
+.plupload-image > .plupload-tags { margin-left:0; position:absolute; float:none; bottom:28px; right:0; padding:0; width:28px; line-height:28px; height:28px; background:white; border-radius:4px; border-bottom-left-radius: 0; }
+.plupload-image > .plupload-tags > i { margin-right:0; margin-left:0.25em; }
+.plupload-image > .plupload-edit { margin-left:0; position:absolute; float:none; bottom:28px; left:0; padding:0; width:28px; line-height:28px; height:28px; background:white; border-radius:4px; border-bottom-right-radius:0; }
+.plupload-image > .plupload-edit > i { margin-left:0.25em; margin-top:2px; }
+
+.plupload-image-container.plupload-single .plupload-buttons { text-align:center; margin-top:14px; }
+
+.plupload-wait .plupload-settings,
+.plupload-wait .plupload-tags,
+.plupload-wait .plupload-edit,
+.plupload-uploading .plupload-settings,
+.plupload-uploading .plupload-tags,
+.plupload-uploading .plupload-edit,
+.plupload-disabled .plupload-browse,
+.plupload-disabled .plupload-remove,
+.plupload-disabled .plupload-settings,
+.plupload-disabled .plupload-tags,
+.plupload-disabled .plupload-edit,
+.plupload-disabled .plupload-drag,
+.plupload-disabled object,
+.plupload-disabled input { display:none !important; }
+
+#plupload-holder { box-shadow:inset 0 0 4px gray; background:silver; }
+
+.plupload-draggable.plupload-file { padding-left:4.5rem; }
+.plupload-draggable.plupload-file .plupload-progress { left:4rem; }
+.plupload-draggable.plupload-image { padding-left:0.5rem; }
+.plupload-draggable.plupload-image .plupload-progress { left:10px; }
+
+.plupload-multiple .plupload-list { margin-top:1rem; }

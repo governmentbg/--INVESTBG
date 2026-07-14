@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS modules ;
+DROP TABLE IF EXISTS mails ;
+DROP TABLE IF EXISTS log_system ;
+DROP TABLE IF EXISTS user_pending ;
+DROP TABLE IF EXISTS user_groups_provisional ;
+DROP TABLE IF EXISTS authentication ;
+DROP TABLE IF EXISTS versions ;
+DROP TABLE IF EXISTS user_providers ;
+DROP TABLE IF EXISTS user_organizations ;
+DROP TABLE IF EXISTS user_groups ;
+DROP TABLE IF EXISTS log ;
+DROP TABLE IF EXISTS organization ;
+DROP TABLE IF EXISTS group_permissions ;
+DROP TABLE IF EXISTS grps ;
+DROP TABLE IF EXISTS permissions ;
+DROP TABLE IF EXISTS users ;
+DROP TABLE IF EXISTS uploads ;
