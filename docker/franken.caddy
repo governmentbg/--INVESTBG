@@ -1,0 +1,42 @@
+{
+	{$CADDY_GLOBAL_OPTIONS}
+
+	auto_https disable_redirects
+
+	frankenphp {
+		{$FRANKENPHP_CONFIG}
+		php_ini memory_limit 256M
+	}
+}
+
+{$CADDY_EXTRA_CONFIG}
+
+{$SERVER_NAME:localhost} {
+	root * /app/public/
+	encode zstd br gzip
+
+	@static path_regexp static ^(/assets/.*)\.([0-9]+)\.(css|js|jpg|png|jpeg|gif)$
+	rewrite @static {re.static.1}.{re.static.3}
+
+	request_header X-Sendfile-Type x-accel-redirect
+	intercept {
+		@accel header X-Accel-Redirect *
+		handle_response @accel {
+			root * /shared/sendfile/
+			rewrite * {resp.header.X-Accel-Redirect}
+			method * GET
+
+			# Remove the X-Accel-Redirect header set by PHP for increased security
+			header -X-Accel-Redirect
+
+			file_server
+		}
+	}
+
+	{$CADDY_SERVER_EXTRA_DIRECTIVES}
+
+	php_server {
+        try_files {path} index.php
+        root /app/public
+    }
+}

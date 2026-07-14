@@ -1,0 +1,1 @@
+INSERT INTO modules (name, slug, loaded, classname, pos) VALUES ('api', 'api', 1, '\webadmin\modules\common\api\APIModule', 1001);

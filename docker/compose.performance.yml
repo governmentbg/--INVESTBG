@@ -1,0 +1,10 @@
+services:
+    app:
+        environment:
+            DEBUG: "false"
+            ENVCACHE: "true"
+            LANGCACHE: "true"
+            ASSETCACHE: "true"
+            TRANSLATIONS: "false"
+            STORAGE_REQ: ""
+        entrypoint: sh -c "cd /var/www/html/webadmin/ && php ./scripts/run.php permissions && php ./scripts/run.php cache:env  && php ./scripts/run.php cache:langs && php-fpm"

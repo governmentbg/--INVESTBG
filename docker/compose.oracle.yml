@@ -1,0 +1,19 @@
+services:
+    app:
+        build:
+            dockerfile: php.oracle.dockerfile
+        environment:
+            DATABASE: "oracle://WEBADMIN:webadmin@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=database)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=FREEPDB1)))/WEBADMIN?schema=WEBADMIN&mode=strtolower&charset=UTF8&version=12"
+        depends_on:
+            - database
+    database:
+        image: oracle/database:19.3.0-ee-slim-faststart # replace with image ID
+        restart: always
+        environment:
+            APP_USER: webadmin
+            APP_USER_PASSWORD: webadmin
+            ORACLE_PASSWORD: password
+        volumes:
+            - ./../storage/database/oracle/:/dataset/
+            - ./oracle.sh:/docker-entrypoint-initdb.d/oracle.sh
+

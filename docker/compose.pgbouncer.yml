@@ -1,0 +1,21 @@
+services:
+    app:
+        environment:
+            DATABASE: "postgre://postgres:postgres@bouncer/postgres?schema=public&persist=1"
+        depends_on:
+            - database
+    database:
+        environment:
+            POSTGRES_HOST_AUTH_METHOD: md5
+            POSTGRES_INITDB_ARGS: --auth=md5
+    bouncer:
+        image: edoburu/pgbouncer
+        environment:
+            - DB_USER=postgres
+            - DB_PASSWORD=postgres
+            - DB_HOST=database
+            - DB_NAME=postgres
+            - POOL_MODE=session
+            - ADMIN_USERS=postgres
+        depends_on:
+            - database

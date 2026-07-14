@@ -1,0 +1,13 @@
+openssl ecparam -genkey -name prime256v1 -out push_private.pem
+openssl ec -in push_private.pem -pubout -outform DER|tail -c 65|base64|tr -d '=' |tr '/+' '_-' >> push_public.txt
+openssl ec -in push_private.pem -outform DER|tail -c +8|head -c 32|base64|tr -d '=' |tr '/+' '_-' >> push_private.txt
+
+SAMPLE CODE:
+App::instance()->push(
+    [
+        "title" => "Welcome!",
+        "body"  => "Yes, it works!",
+        "tag"   => "/system/webadmin/public/settings"
+    ],
+    array_values(json_decode($dbc->one("SELECT push FROM users WHERE usr = 1"), true))[0]
+);

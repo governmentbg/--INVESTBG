@@ -1,0 +1,7 @@
+services:
+    app:
+        environment:
+            CACHE: "redis"
+            STORAGE_CACHE: "cache:6379"
+    cache:
+        image: redis:latest

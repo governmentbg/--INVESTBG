@@ -1,0 +1,16 @@
+services:
+    app:
+        environment:
+            DATABASE: "mysql://root:password@database/webadmin"
+        depends_on:
+            - database
+    database:
+        image: mysql:latest
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: webadmin
+        volumes:
+            - ./../storage/database/mysql/:/dataset/
+            - ./mysql.sh:/docker-entrypoint-initdb.d/mysql.sh

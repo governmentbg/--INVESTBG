@@ -1,0 +1,211 @@
+{
+    "name": "vakata/webadmin",
+    "description": "A basic platform for building systems",
+    "license": "proprietary",
+    "type": "project",
+    "config": {
+        "optimize-autoloader": true,
+        "classmap-authoritative": true,
+        "sort-packages": true,
+        "bin-compat": "full",
+        "platform-check": false,
+        "allow-plugins": {
+            "dg/composer-cleaner": true,
+            "mouf/nodejs-installer": true,
+            "vakata/frontend-dependencies": true
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/vakata/nodejs-installer"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/vakata/web-push-php.git"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-curl": "*",
+        "ext-iconv": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-simplexml": "*",
+        "ext-zip": "*",
+        "box/spout": "^3.3",
+        "chillerlan/php-qrcode": "^4.3",
+        "minishlink/web-push": "dev-master as 7.0.0",
+        "monolog/monolog": "^3.0",
+        "phpoffice/phpspreadsheet": "^5.3",
+        "symfony/routing": "^7.2",
+        "tecnickcom/tcpdf": "^6.11",
+        "vakata/authentication": "^3.1",
+        "vakata/cache": "^3.0",
+        "vakata/certificate": "^5.5",
+        "vakata/collection": "^1.5",
+        "vakata/config": "^2.0",
+        "vakata/database": "^5.4",
+        "vakata/di": "^3.0",
+        "vakata/events": "^1.0",
+        "vakata/files": "^3.4",
+        "vakata/http": "^3.0",
+        "vakata/ids": "^2.0",
+        "vakata/image": "^2.1",
+        "vakata/intl": "^3.0",
+        "vakata/jwt": "^4.0",
+        "vakata/mail": "^1.2",
+        "vakata/migrations": "^1.1",
+        "vakata/phptree": "^3.1",
+        "vakata/random": "^2.0",
+        "vakata/session": "^4.0",
+        "vakata/spreadsheet": "^2.0",
+        "vakata/user": "^4.0",
+        "vakata/validation": "^1.7",
+        "vakata/views": "^3.0"
+    },
+    "require-dev": {
+        "dg/composer-cleaner": "^2.2",
+        "roave/security-advisories": "dev-latest",
+        "vakata/frontend-dependencies": "^2.0",
+        "symfony/var-dumper": "^7.0"
+    },
+    "suggest": {
+        "ext-readline": "Add if you want to run the console installer",
+        "ext-sodium": "Add if you want do package signed versions of the product",
+        "ext-pcntl": "Add if you need to run queues"
+    },
+    "autoload": {
+        "psr-4": {
+            "tests\\": "tests",
+            "base\\": "app/classes/base/",
+            "schema\\": "app/classes/schema/",
+            "webadmin\\": "app/classes/webadmin/",
+            "zni\\": "app/classes/zni/"
+        }
+    },
+    "extra": {
+        "cleaner-ignore": {
+            "vakata/nodejs-installer": true,
+            "mouf/nodejs-installer": true,
+            "tecnickcom/tcpdf": true
+        },
+        "vakata": {
+            "frontend-dependencies": {
+                "install": false,
+                "update": false,
+                "target": "public/assets/static/",
+                "dependencies": {
+                    "jquery": {
+                        "version": "^3.7",
+                        "src": "dist/jquery.min.js"
+                    },
+                    "perfect-scrollbar": {
+                        "version": "1.5",
+                        "src": "{dist/perfect-scrollbar.min.js,css/perfect-scrollbar.css}"
+                    },
+                    "plupload": {
+                        "version": "^2.3",
+                        "src": "js/plupload.full.min.js"
+                    },
+                    "leaflet": {
+                        "version": "^1.9",
+                        "src": "{dist/leaflet.css,dist/leaflet.js,dist/images}"
+                    },
+                    "tinymce": "^6.8",
+                    "fomantic-ui-css": {
+                        "version": "^2.9",
+                        "src": "{semantic.min.*,themes}"
+                    },
+                    "jq-tablesort": {
+                        "version": "0.0.3",
+                        "src": "dist/tablesort.min.js"
+                    },
+                    "jstree": {
+                        "version": "^3.3",
+                        "src": "dist/*"
+                    },
+                    "moment": {
+                        "version": "^2.30",
+                        "src": "min/*"
+                    },
+                    "urijs": {
+                        "version": "^1.19",
+                        "src": "src/URI.min.js"
+                    },
+                    "fabric": {
+                        "version": "^2.6.0",
+                        "src": "dist/fabric.js"
+                    },
+                    "swagger-ui": {
+                        "version": "^5.22.0",
+                        "src": "dist/*"
+                    }
+                }
+            }
+        }
+    },
+    "scripts": {
+        "tools": "@php tools/download.php",
+        "phpstan": [
+            "@php tools/phpstan.phar clear-result-cache",
+            "@php tools/phpstan.phar analyze -c ./tools/config/.phpstan.neon"
+        ],
+        "psalm": "@php tools/psalm.phar --config=./tools/config/.psalm.xml --no-diff --no-progress --no-suggestions --no-cache",
+        "phpmd": "@php tools/phpmd.phar ./ text ./tools/config/.phpmd.xml --exclude */views/*,*/vendor/*,*/tests/*,*/tools/composer/*",
+        "phpcs": "@php tools/phpcs.phar --standard=PSR12 --extensions=php --ignore=*/vendor/*,*/node_modules/*,*/storage/*,*/tools/composer/* ./",
+        "phpcsfix": "@php tools/phpcbf.phar --standard=PSR12 --extensions=php --ignore=*/vendor/*,*/node_modules/*,*/storage/*,*/tools/composer/* ./",
+        "phpunit": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php tools/phpunit.phar --bootstrap vendor/autoload.php tests"
+        ],
+        "runner": [
+            "@php scripts/run.php"
+        ],
+        "static": [
+            "@phpstan",
+            "@psalm",
+            "@phpmd"
+        ],
+        "analyze": [
+            "@static",
+            "@phpcs"
+        ],
+        "test": [
+            "@analyze",
+            "@phpunit"
+        ],
+        "cache": [
+            "@runner permissions",
+            "@runner cache:clean",
+            "@runner cache:langs",
+            "@runner cache:env"
+        ],
+        "frontend": [
+            "Composer\\Config::disableProcessTimeout",
+            "@frontend-dependencies",
+            "@runner frontend:fix",
+            "@runner frontend:svg"
+        ],
+        "database": [
+            "@runner migrations:up"
+        ],
+        "database-test": [
+            "@runner migrations:test"
+        ],
+        "setup": [
+            "@runner setup",
+            "@database",
+            "@cache"
+        ],
+        "refresh": [
+            "@cache",
+            "@runner schema",
+            "@composer dump-autoload"
+        ],
+        "reset": [
+            "@runner migrations:reset",
+            "@refresh"
+        ]
+    }
+}

@@ -1,0 +1,11 @@
+volumes:
+    sqlite:
+
+services:
+    app:
+        environment:
+            DATABASE: "sqlite:///sqlite/db.sqlite"
+        entrypoint: sh -c "cd /var/www/html/webadmin/ && php ./scripts/run.php permissions && php ./scripts/run.php migrations:up && chmod 0777 /sqlite && chmod 0666 /sqlite/db.sqlite && php-fpm"
+        volumes:
+            - sqlite:/sqlite:rw
+

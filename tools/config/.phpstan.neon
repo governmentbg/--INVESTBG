@@ -1,0 +1,30 @@
+parameters:
+	ignoreErrors:
+		-
+			identifier: missingType.iterableValue
+	level: 8
+	paths:
+		- ../../app
+		- ../../public
+		- ../../scripts
+	phpVersion: 80400
+	treatPhpDocTypesAsCertain: false
+	universalObjectCratesClasses:
+		- vakata\user\User
+		- vakata\user\UserInterface
+		- vakata\phptree\Node
+		- webadmin\components\html\TableRow
+	polluteScopeWithLoopInitialAssignments: false
+	polluteScopeWithAlwaysIterableForeach: false
+	checkExplicitMixedMissingReturn: true
+	checkFunctionNameCase: true
+	checkInternalClassCaseSensitivity: true
+	reportMaybesInMethodSignatures: true
+	reportMaybesInPropertyPhpDocTypes: true
+	reportStaticMethodSignatures: true
+	checkTooWideReturnTypesInProtectedAndPublicMethods: true
+	checkUninitializedProperties: true
+	checkDynamicProperties: true
+	checkBenevolentUnionTypes: true
+	reportAlwaysTrueInLastCondition: false
+	reportWrongPhpDocTypeInVarTag: true

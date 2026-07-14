@@ -1,0 +1,4 @@
+services:
+    cache:
+        image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
+        entrypoint: sh -c "dragonfly --logtostderr --memcached_port 11211"

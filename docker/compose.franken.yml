@@ -1,0 +1,38 @@
+name: webadmin-frankenphp
+
+volumes:
+    shared:
+    caddy_data:
+    caddy_config:
+
+services:
+    app:
+        build:
+            dockerfile: franken.dockerfile
+        ports:
+            - "8080:80" # HTTP
+        environment:
+            DEBUG: "false"
+            ENVCACHE: "true"
+            LANGCACHE: "true"
+            ASSETCACHE: "true"
+            FRANKENPHP_CONFIG: "worker /app/public/index.php"
+            SERVER_NAME: ":80"
+            DATABASE: "postgre://${USER}@host.docker.internal/webadmin?schema=public&persist=1"
+            LOG: syslog
+            SENDFILE: "caddy:/shared/sendfile"
+            TRANSLATIONS: "false"
+            STORAGE_REQ: ""
+        entrypoint: sh -c "cd /app/ && php ./scripts/run.php permissions && php ./scripts/run.php cache:env && php ./scripts/run.php cache:langs && cd ./public && php-fpm"
+        volumes:
+            - shared:/shared
+            - caddy_data:/data
+            - caddy_config:/config
+            - ./../:/app/
+            - ./.env.php:/app/.env.php
+            - ./.env:/app/.env:ro
+            - ./franken.caddy:/etc/caddy/Caddyfile
+            - ./franken.php:/app/public/index.php
+    cache:
+        image: memcached:latest
+
